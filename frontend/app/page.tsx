@@ -11,6 +11,14 @@ export default function Home() {
     editorRef.current = editorInstance;
   };
 
+  function showValue() {
+    if (!editorRef.current) {
+      return;
+    }
+
+    alert(editorRef.current.getValue());
+  }
+
   return (
     <Group>
       <Panel defaultSize="50%">
@@ -26,10 +34,16 @@ export default function Home() {
           defaultValue="// some comment"
           onMount={handleEditorDidMount}
         />
-        <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+        <button
+          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          onClick={showValue}
+        >
           Run
         </button>
-        <button className="bg-white-500 font-bold py-2 px-4 rounded">
+        <button
+          className="bg-white-500 hover:bg-gray-300 font-bold py-2 px-4 rounded"
+          onClick={showValue}
+        >
           Submit
         </button>
       </Panel>
