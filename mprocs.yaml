@@ -24,4 +24,4 @@ procs:
   backend:
     shell: "cd code && mvn spring-boot:run"
   frontend:
-    shell: "cd frontend && pnpm dev"
+    shell: "cd frontend && npm run dev"
