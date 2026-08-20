@@ -1,0 +1,27 @@
+style:
+  proc_list:
+    style:
+      fg: "White"
+    selected:
+      fg: "Magenta"
+      modifiers: ["Bold"]
+    focused:
+      fg: "Green"
+      modifiers: ["Bold"]
+  border:
+    style:
+      fg: "DarkGray"
+    focused:
+      fg: "Cyan"
+  keymap:
+    style:
+      fg: "DarkGray"
+    key:
+      fg: "Yellow"
+      modifiers: ["Bold"]
+
+procs:
+  backend:
+    shell: "cd code && mvn spring-boot:run"
+  frontend:
+    shell: "cd frontend && pnpm dev"
