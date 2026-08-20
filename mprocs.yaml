@@ -1,27 +1,5 @@
-style:
-  proc_list:
-    style:
-      fg: "White"
-    selected:
-      fg: "Magenta"
-      modifiers: ["Bold"]
-    focused:
-      fg: "Green"
-      modifiers: ["Bold"]
-  border:
-    style:
-      fg: "DarkGray"
-    focused:
-      fg: "Cyan"
-  keymap:
-    style:
-      fg: "DarkGray"
-    key:
-      fg: "Yellow"
-      modifiers: ["Bold"]
-
 procs:
   backend:
-    shell: "cd code && mvn spring-boot:run"
+    shell: "cd code && mvn -q spring-boot:run 2>&1 | stdbuf -oL awk '{ print \"\\033[38;5;39m[backend]\\033[0m \" strftime(\"%H:%M:%S\") \" | \" $0 }'"
   frontend:
-    shell: "cd frontend && npm run dev"
+    shell: "cd frontend && npm run dev 2>&1 | stdbuf -oL awk '{ print \"\\033[38;5;70m[frontend]\\033[0m \" strftime(\"%H:%M:%S\") \" | \" $0 }'"
