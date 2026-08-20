@@ -1,52 +1,15 @@
-"use client";
-import { Group, Panel, Separator } from "react-resizable-panels";
-import Editor, { type OnMount } from "@monaco-editor/react";
-import { useRef } from "react";
-import type { editor } from "monaco-editor";
+"use client"
+import dynamic from "next/dynamic";
 
-export default function Home() {
-  const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
+// Dynamically import client workspace to avoid SSR issues with xterm/Monaco
+const CodeWorkspace = dynamic(() => import("./components/CodeWorkSpace"), {
+  ssr: false,
+});
 
-  const handleEditorDidMount: OnMount = (editorInstance) => {
-    editorRef.current = editorInstance;
-  };
-
-  function showValue() {
-    if (!editorRef.current) {
-      return;
-    }
-
-    alert(editorRef.current.getValue());
-  }
-
+export default function Page() {
   return (
-    <Group>
-      <Panel defaultSize="50%">
-        <p>This is an AI window</p>
-      </Panel>
-
-      <Separator />
-
-      <Panel>
-        <Editor
-          height="90vh"
-          defaultLanguage="javascript"
-          defaultValue="// some comment"
-          onMount={handleEditorDidMount}
-        />
-        <button
-          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-          onClick={showValue}
-        >
-          Run
-        </button>
-        <button
-          className="bg-white-500 hover:bg-gray-300 font-bold py-2 px-4 rounded"
-          onClick={showValue}
-        >
-          Submit
-        </button>
-      </Panel>
-    </Group>
+    <main className="h-screen w-screen">
+      <CodeWorkspace />
+    </main>
   );
 }
