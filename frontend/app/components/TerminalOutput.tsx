@@ -1,14 +1,16 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import "xterm/css/xterm.css";
 
 interface TerminalProps {
   language: string;
   onSocketReady?: (socket: WebSocket) => void;
 }
 
-export default function TerminalOutput({ language, onSocketReady }: TerminalProps) {
+export default function TerminalOutput({
+  language,
+  onSocketReady,
+}: TerminalProps) {
   const terminalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -43,7 +45,9 @@ export default function TerminalOutput({ language, onSocketReady }: TerminalProp
       term.open(terminalRef.current);
       fitAddon.fit();
 
-      socket = new WebSocket(`ws://localhost:8080/ws/terminal?language=${language}`);
+      socket = new WebSocket(
+        `ws://localhost:8080/ws/terminal?language=${language}`,
+      );
 
       socket.onopen = () => {
         if (!isMounted || !socket) return;
