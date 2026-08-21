@@ -36,7 +36,7 @@ public class DockerContainerService {
                 .withCapDrop(Capability.ALL)                          // Strip all kernel capabilities
                 .withSecurityOpts(List.of("no-new-privileges:true")) // Prevent setuid privilege escalation
                 .withNetworkMode("none")                              // Block all incoming/outgoing network access
-                .withMemory(256 * 1024 * 1024L)                      // 256MB RAM cap
+                .withMemory(128 * 1024 * 1024L)                      // 256MB RAM cap
                 .withCpuQuota(50000L)                                // Limit CPU usage to 50% of 1 core
                 .withPidsLimit(50L)                                  // Stop fork bombs
                 .withAutoRemove(true);                               // Destroy container on exit
